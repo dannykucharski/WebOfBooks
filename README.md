@@ -1,0 +1,1 @@
+Projekt WebOfBooks z wykorzystaniem frameworku Django. Zawiera modele wymagaen do stworzenie aplikacji o książkach z wykorzystaniem modeli CRUD. Dodatkowe funkcjonalności: wyszukiwarka po po tytułach książek i imieniu oraz nazwisku autora, ocena na bazie django-star-ratings, rejestracja oraz logowanie. 
