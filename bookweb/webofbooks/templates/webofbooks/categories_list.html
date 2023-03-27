@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Lista kategorii</h3>
+<ol>
+    {% for category in object_list %}
+    <li>
+        {{ category.name }}
+        <div>
+            <a href="{% url 'webofbooks:category_detail' category.id%}"><button type="button" class="btn btn-success">Lista książek</button></a>
+            {% if user.is_superuser %}
+            <a href="{% url 'webofbooks:category_update' category.id%}"><button type="button" class="btn btn-primary">Zmień nazwę</button></a>
+            <a href="{% url 'webofbooks:category_delete' category.id%}"><button type="button" class="btn btn-danger">Usuń</button></a>
+            {% endif %}
+
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+{% if user.is_superuser %}
+<p><a href="{% url 'webofbooks:category_create' %}"><button type="button" class="btn btn-secondary">Dodaj kategorię do listy</button></a><p>
+{% endif %}
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+
+
+</body>
+</html>

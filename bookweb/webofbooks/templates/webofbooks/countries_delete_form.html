@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      Usunąć kraj {{ object.name }}?
+    </p>
+    <input type="submit" value="Usuń" class="btn btn-danger">
+  </form>
+{% endblock %}
+<br/>
+<p><a href="{% url 'webofbooks:countries_list' %}"><button type="button" class="btn btn-secondary">Wróć do listy krajów</button></a></p>
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Lista krajów</h3>
+<ol>
+    {% for country in object_list %}
+    <li>
+        {{ country.name }}
+        <div>
+        <a href="{% url 'webofbooks:country_detail' country.id %}"><button type="button" class="btn btn-success">Pokaż autorów</button></a>
+        {% if user.is_superuser %}
+        <a href="{% url 'webofbooks:country_update' country.id %}"><button type="button" class="btn btn-primary">Edytuj nazwę kraju</button></a>
+        <a href="{% url 'webofbooks:country_delete' country.id %}"><button type="button" class="btn btn-danger">Usuń kraj z listy</button></a>
+        {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+
+{% if user.is_superuser %}
+<p><a href="{% url 'webofbooks:country_create' %}"><button type="button" class="btn btn-secondary">Dodaj kraj</button></a></p>
+{% endif %}
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+
+
+</body>
+</html>

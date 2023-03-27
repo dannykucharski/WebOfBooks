@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista książek, którymi jesteś zainteresowany/a</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Lista książek, którymi jesteś zainteresowany/a</h3>
+<ol>
+    {% for book in books_interested %}
+    <li>
+        <p><img style='max-width:100px' src="{% static book.book_id.cover.url %}"></p>
+        <p><b>Tytuł:</b> {{ book.book_id.title }}</p>
+        <p><b>Autor:</b> {{ book.book_id.author_id.name }} {{ book.book_id.author_id.surname }}</p>
+    </li>
+    <a href="{% url 'webofbooks:booksinterested_delete' book.id %}"><button type="button" class="btn btn-danger">Usuń</button></a>
+    {% endfor %}
+</ol>
+
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+</body>
+</html>

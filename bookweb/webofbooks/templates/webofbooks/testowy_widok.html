@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj informacje o książce</title>
+</head>
+<body>
+<h3>Edytuj informacje o książce</h3>
+{% block content %}
+  <form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zmień" class="btn btn-primary">
+  </form>
+{% endblock %}
+<p><a href="{% url 'webofbooks:authors_list' %}"><button>Wróć do listy książek</button></a></p>
+<p><a href="{% url 'webofbooks:homepage' %}"><button>Strona główna</button></a></p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Szukasz książki</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+{% if searched %}
+<h1>Szukałeś {{ searched }}</h1>
+<br/>
+{% for book in books_searched %}
+<img style='max-width:100px' src="{% static book.cover.url %}"> {{ book.title }} - {{ book.author_id.name }} {{ book.author_id.surname }}<a href="{% url 'webofbooks:book_detail' book.id %}"><br/><button type="button" class="btn btn-success">Szczegóły</button></a><br/>
+{% endfor %}
+{% for author in author_searched %}
+{{ author.name }} {{ author.surname }}<a href="{% url 'webofbooks:author_detail' author.id %}"><br/><button type="button" class="btn btn-success">Pokaż książki autora</button></a><br/>
+{% endfor %}
+{% else %}
+<h1>Zapomniałeś wyszukać książki</h1>
+{% endif %}
+</body>
+</html>

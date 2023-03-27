@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Edytuj informacje o książce</h3>
+{% block content %}
+  <form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zmień" class="btn btn-success">
+  </form>
+{% endblock %}
+<br/>
+<p><a href="{% url 'webofbooks:books_list' %}"><button type="button" class="btn btn-secondary">Wróć do listy</button></a></p>
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+</body>
+</html>

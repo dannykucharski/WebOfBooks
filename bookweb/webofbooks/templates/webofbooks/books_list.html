@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Lista książek</h3>
+<ol>
+    {% for book in object_list %}
+    <li>
+        <p><img style='max-width:100px' src="{% static book.cover.url %}"></p>
+        <p><b>Tytuł:</b> {{ book.title }}</p>
+        <p><b>Autor:</b> {{ book.author_id.name }} {{ book.author_id.surname }}</p>
+        <div>
+            <a href="{% url 'webofbooks:book_detail' book.id %}"><button type="button" class="btn btn-success">Szczegóły</button></a>
+            {% if user.is_superuser %}
+            <a href="{% url 'webofbooks:book_update' book.id %}"><button type="button" class="btn btn-primary">Edytuj</button></a>
+            <a href="{% url 'webofbooks:book_delete' book.id %}"><button type="button" class="btn btn-danger">Usuń</button></a>
+            {% endif %}
+
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+
+{% if user.is_superuser %}
+<p><a href="{% url 'webofbooks:book_create' %}"><button type="button" class="btn btn-secondary">Dodaj książkę</button></a></p>
+{% endif %}
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+</body>
+</html>

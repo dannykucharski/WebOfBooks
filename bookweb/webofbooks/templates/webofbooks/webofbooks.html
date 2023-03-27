@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<h1>Witamy w świecie książek</h1>
+
+<p><b>Ostatnio dodane książki</b></p>
+
+<ul>
+  {% for book in new_books %}
+    <li>
+        <p>{{ book.title }} <a href="{% url 'webofbooks:book_detail' book.id %}"><button type="button" class="btn btn-secondary">Szczegóły</button></a></p>
+    </li>
+{% endfor %}
+
+</body>
+</html>

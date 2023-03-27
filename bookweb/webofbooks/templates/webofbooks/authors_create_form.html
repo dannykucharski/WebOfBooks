@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>
+  Dodaj autora
+</h3>
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <table>{{ form.as_p }}</table>
+    <input type="submit" value="Dodaj" class="btn btn-success">
+  </form>
+{% endblock %}
+<br/>
+<p><a href="{% url 'webofbooks:authors_list' %}"><button type="button" class="btn btn-secondary">Wróć do listy</button></a></p>
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+
+</body>
+</html>

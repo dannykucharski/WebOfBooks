@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Witamy w świecie książek</title>
+</head>
+<body>
+{% include 'webofbooks/navbar.html' %}
+<h3>Lista autorów</h3>
+<ol>
+    {% for author in object_list %}
+    <li>
+        {{ author.name }} {{ author.surname }}
+        <p><a href="{% url 'webofbooks:author_detail' author.id %}"><button type="button" class="btn btn-success">Pokaż książki autora</button></a></p>
+        {% if user.is_superuser %}
+        <p><a href="{% url 'webofbooks:author_update' author.id %}"><button type="button" class="btn btn-primary">Edytuj</button></a></p>
+        <p><a href="{% url 'webofbooks:author_delete' author.id %}"><button type="button" class="btn btn-danger">Usuń</button></a></p>
+        {% endif %}
+
+    </li>
+    {% endfor %}
+</ol>
+
+{% if user.is_superuser %}
+<p><a href="{% url 'webofbooks:author_create' %}"><button type="button" class="btn btn-secondary">Dodaj autora do listy</button></a><p>
+{% endif %}
+<p><a href="{% url 'webofbooks:homepage' %}"><button type="button" class="btn btn-dark">Strona główna</button></a></p>
+</body>
+</html>
